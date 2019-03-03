@@ -1,0 +1,35 @@
+{
+  "name": "cintanegra27",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --detectOpenHandles",
+    "start": "nodemon app/app.js",
+    "watch": "nodemon -e js, graphql --exec 'npm run lint & npm start'",
+    "lint": "eslint app/"
+  },
+  "engine": {
+    "node": ">=8.3.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "cloudinary": "^1.13.2",
+    "dotenv": "^6.2.0",
+    "graphql-import": "^0.7.1",
+    "graphql-tools": "^4.0.4",
+    "graphql-yoga": "^1.17.4",
+    "jest": "^24.1.0",
+    "jsonwebtoken": "^8.4.0",
+    "mongoose": "^5.4.13",
+    "morgan": "^1.9.1",
+    "nodemon": "^1.18.10"
+  },
+  "devDependencies": {
+    "eslint": "^5.14.1",
+    "eslint-plugin-node": "^8.0.1",
+    "eslint-plugin-security": "^1.4.0"
+  }
+}

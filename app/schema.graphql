@@ -1,0 +1,131 @@
+scalar Upload
+
+type Query{
+    Users:[User]
+    Stores(category: CATEGORYSTORE):[Store]
+    products(category: CATEGORYPRODUCT):[Product]
+}
+
+type Mutation{
+    signup(data:UserCreateInput!):Auth
+    login(email:String!, password:String!):Auth
+    createStore(data:StoreCreateInput!):Store
+    deleteUser(id:ID!):User
+    addProductToStore(id:ID!, data:productReference!):Store
+    addProductToStores(data:productReference!):Store
+    # createDelivery(data:DeliveryCreateInput!):Delivery
+    createProductModel(data:ProductCreateInput!):Product
+    deleteProductToStore(id:ID):Store
+    deleteProduct(id:ID!):Product
+}
+
+type Auth{
+    token:String
+    message:String
+}
+
+type User{
+    _id:ID
+    first_name:String
+    last_name:String
+    email:String
+    prime:Boolean
+    gender:GENDER
+    deliverys:[Delivery]
+    store_favorite:[Store]
+    profile_image:String
+    is_active:Boolean
+}
+
+type Delivery{
+    _id:ID
+    user:User
+    store:Store
+    rt_assigne:String
+    products:Product
+    method_payment:Payment
+    import:Int
+}
+
+type Store{
+    _id:ID
+    name:String!
+    img_store:String
+    category:CATEGORYSTORE
+    pricing_domicile:Int
+    products:[Product]
+}
+
+type Product{
+    _id:ID
+    price:Int
+    name_product:String
+    img_product:String
+    description_product:String
+    category:CATEGORYPRODUCT
+}
+
+input UserCreateInput{
+    first_name:String!
+    last_name:String!
+    email:String!
+    password:String!
+    profile_image:Upload
+}
+
+input ProductCreateInput{
+    category:CATEGORYPRODUCT!
+    price:Int!
+    name_product:String!
+    img_product:Upload
+    description_product:String!
+}
+
+input productReference{
+    _id:ID!
+}
+
+input StoreCreateInput{
+    name:String!
+    category:CATEGORYSTORE
+    img_store:Upload
+    pricing_domicile:Int
+}
+# input DeliveryCreateInput{
+#     user:ID!
+#     store:ID!
+#     products:Product!
+#     method_payment:Payment!
+#     import:IMPORT!
+# }
+
+type IMPORT{
+    cost_products:Int,
+    chargers:Int,
+    totalPurchase:Int
+}
+
+enum GENDER{
+    Male
+    Female
+}
+
+enum Payment{
+    PAYPAL
+    TARJETADECREDITO
+    EFECTIVO
+}
+
+enum CATEGORYSTORE{
+    Sushi
+    Hamburguesas
+    Tacos
+    Vegana
+    Pizza
+}
+enum CATEGORYPRODUCT{
+ Bebida
+ Entradas
+ PlatoFuerte
+ Postre
+}
